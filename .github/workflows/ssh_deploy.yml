@@ -18,35 +18,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, 
       # so your workflow can access it
       - uses: actions/checkout@main
-
-      # Copying files and artifacts via SSH
-      #- name: Copying files to server
-      #  uses: garygrossgarten/github-action-ssh@v0.5.0
-      #  with:
-      #    host: ${{ secrets.REMOTE_HOST }}
-      #    username: ${{ secrets.REMOTE_USER }}
-      #    key: ${{ secrets.SSH_KEY }}
-      #    passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
-      #    rm: true
-      #    source: "/"
-      #    target: "${{ secrets.REMOTE_DIR }}"
-
-      #- name: executing remote ssh commands using password
-        #uses: appleboy/ssh-action@master
-        #with:
-          #host: ${{ secrets.REMOTE_HOST }}
-          #username: ${{ secrets.REMOTE_USER }}
-          #password: ${{ secrets.REMOTE_PASS }}
-          #key: ${{ secrets.SSH_KEY }}
-          #passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
-          #script: whoami
       
       - name: Deploy to Staging server
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
           ARGS: "-rltgoDzvO"
-          SOURCE: "cv/"
+          SOURCE: ""
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_DIR }}
