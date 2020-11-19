@@ -23,7 +23,8 @@ jobs:
             ls -a
           host: ${{ secrets.REMOTE_HOST }}
           user: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SSH_KEY }}
+          pass: ${{ secrets.REMOTE_PASS }}
+          #key: ${{ secrets.SSH_KEY }}
       
       #- name: Deploy to Staging server 1
       #  uses: easingthemes/ssh-deploy@v2.1.5
