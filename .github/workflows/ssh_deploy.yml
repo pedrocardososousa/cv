@@ -31,12 +31,22 @@ jobs:
       #    source: "/"
       #    target: "${{ secrets.REMOTE_DIR }}"
 
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.REMOTE_PASS }}
+      #- name: executing remote ssh commands using password
+        #uses: appleboy/ssh-action@master
+        #with:
+          #host: ${{ secrets.REMOTE_HOST }}
+          #username: ${{ secrets.REMOTE_USER }}
+          #password: ${{ secrets.REMOTE_PASS }}
           #key: ${{ secrets.SSH_KEY }}
           #passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
-          script: whoami
+          #script: whoami
+      
+      - name: Deploy to Staging server
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          ARGS: "-rltgoDzvO"
+          SOURCE: "/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_DIR }}
