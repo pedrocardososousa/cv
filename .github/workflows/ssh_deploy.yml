@@ -19,13 +19,6 @@ jobs:
       # so your workflow can access it
       - uses: actions/checkout@main
 
-      # Build your static website with Eleventy
-      - name: Build Eleventy
-        uses: TartanLlama/actions-eleventy@master
-        with:
-          args: --output html
-          install_dependencies: true
-
       # Copying files and artifacts via SSH
       - name: Copying files to server
         uses: appleboy/scp-action@master
