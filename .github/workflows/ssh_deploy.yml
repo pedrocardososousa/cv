@@ -14,14 +14,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
+        
+      - name: ls -a via ssh
+        uses: fifsky/ssh-action@v0.0.4
+        with:
+          command: |
+            cd /tmp
+            ls -a
+          host: ${{ secrets.REMOTE_HOST }}
+          user: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_KEY }}
       
-      - name: Deploy to Staging server 1
-        uses: easingthemes/ssh-deploy@v2.1.5
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          ARGS: "-rltgoDzvO"
-          SOURCE: "site/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_DIR }}
-          PORT: ${{ secrets.SSH_PORT }}
+      #- name: Deploy to Staging server 1
+      #  uses: easingthemes/ssh-deploy@v2.1.5
+      #  env:
+      #    SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+      #    ARGS: "-rltgoDzvO"
+      #    SOURCE: "site/"
+      #    REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+      #    REMOTE_USER: ${{ secrets.REMOTE_USER }}
+      #    TARGET: ${{ secrets.REMOTE_DIR }}
+      #    PORT: ${{ secrets.SSH_PORT }}
