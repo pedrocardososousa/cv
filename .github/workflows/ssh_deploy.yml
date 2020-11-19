@@ -30,11 +30,12 @@ jobs:
       #    rm: true
       #    source: "/"
       #    target: "${{ secrets.REMOTE_DIR }}"
-      - name: ls -a via ssh
-        uses: garygrossgarten/github-action-ssh@v0.5.0
+
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
         with:
-          command: ls -a
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
-          passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
-          privateKey: ${{ secrets.SSH_KEY }}
+          password: At3MZh7LtJ6AwFqJ#Cq
+          port: 22
+          script: whoami
